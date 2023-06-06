@@ -26,6 +26,8 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.BottomNavigation
+import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -33,7 +35,9 @@ import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Spa
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -179,7 +183,7 @@ fun AlignYourBodyRow(
          */
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         contentPadding = PaddingValues(horizontal = 16.dp)
-    ){
+    ) {
         items(alignYourBodyData) { item ->
             AlignYourBodyElement(drawable = item.drawable, text = item.text)
         }
@@ -198,8 +202,8 @@ fun FavoriteCollectionsGrid(
         contentPadding = PaddingValues(horizontal = 16.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
-    ){
-        items(favoriteCollectionsData){item ->
+    ) {
+        items(favoriteCollectionsData) { item ->
             FavoriteCollectionCard(
                 drawable = item.drawable,
                 text = item.text,
@@ -252,7 +256,37 @@ fun HomeScreen(modifier: Modifier = Modifier) {
 // Step: Bottom navigation - Material
 @Composable
 private fun SootheBottomNavigation(modifier: Modifier = Modifier) {
-    // Implement composable here
+    BottomNavigation(
+        modifier = modifier,
+        backgroundColor = MaterialTheme.colors.background
+    ) {
+        BottomNavigationItem(
+            icon = {
+                Icon(
+                    imageVector = Icons.Default.Spa,
+                    contentDescription = null
+                )
+            },
+            label = {
+                Text(stringResource(R.string.bottom_navigation_home))
+            },
+            selected = true,
+            onClick = {}
+        )
+        BottomNavigationItem(
+            icon = {
+                   Icon(
+                       imageVector = Icons.Default.AccountCircle,
+                       contentDescription = null
+                   )
+            },
+            label = {
+                    Text(stringResource(R.string.bottom_navigation_profile))
+            },
+            selected = true,
+            onClick = {}
+        )
+    }
 }
 
 // Step: MySoothe App - Scaffold
@@ -330,7 +364,7 @@ fun AlignYourBodyRowPreview() {
 @Composable
 fun HomeSectionPreview() {
     MySootheTheme {
-        HomeSection(R.string.align_your_body){
+        HomeSection(R.string.align_your_body) {
             AlignYourBodyRow()
         }
     }
